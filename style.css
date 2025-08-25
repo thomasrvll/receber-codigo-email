@@ -1,5 +1,5 @@
 /*
- * CSS com Design "Mobile First"
+* CSS com Design "Mobile First"
  * --------------------------------
  * O estilo base é otimizado para celulares. Uma Media Query no final
  * adapta o layout para telas maiores (desktops).
@@ -38,7 +38,7 @@ body {
 
 .container {
     background: var(--container-bg);
-    padding: 30px 25px; /* Padding ajustado para telas menores */
+    padding: 40px 25px; /* AUMENTADO: Mais espaço no topo */
     border-radius: 20px; /* Bordas mais arredondadas, comum em interfaces móveis */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(12px);
@@ -52,11 +52,11 @@ body {
 
 /* --- Tipografia --- */
 h1 {
-    font-size: 1.8rem; /* Título um pouco menor para celular */
+    font-size: 2rem; /* AUMENTADO: Título maior para celular */
     font-weight: 600;
     color: var(--title-color);
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 35px; /* AUMENTADO: Mais espaço abaixo do título */
     line-height: 1.3;
 }
 
@@ -170,8 +170,12 @@ label {
  * Aplicado em telas com largura mínima de 769px.
 */
 @media (min-width: 769px) {
+    .container {
+        padding: 50px 40px; /* AUMENTADO: Mais padding no desktop */
+    }
+    
     h1 {
-        font-size: 2rem; /* Retorna o título ao tamanho original */
+        font-size: 2.3rem; /* AUMENTADO: Título ainda maior no desktop */
     }
 
     /* Efeito de hover só faz sentido no desktop */
