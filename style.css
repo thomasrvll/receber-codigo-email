@@ -1,0 +1,210 @@
+/*
+ * CSS Moderno (Glassmorphism)
+ * Versão com adaptação para dispositivos móveis.
+*/
+
+/* --- Variáveis de Cores e Configurações Globais --- */
+:root {
+    --bg-color-start: #1a1a2e;
+    --bg-color-end: #16213e;
+    --container-bg: rgba(255, 255, 255, 0.08);
+    --primary-text-color: #e0e0e0;
+    --title-color: #ffffff;
+    --accent-color: #8a2be2;
+    --input-bg-color: rgba(0, 0, 0, 0.2);
+    --input-border-color: rgba(255, 255, 255, 0.2);
+    --success-bg: rgba(46, 204, 113, 0.15);
+    --success-text: #2ecc71;
+    --error-bg: rgba(231, 76, 60, 0.15);
+    --error-text: #e74c3c;
+}
+
+/* --- Estilização Base do Corpo da Página --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(45deg, var(--bg-color-start), var(--bg-color-end));
+    color: var(--primary-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* --- Estilização do Container Principal (Efeito Glassmorphism) --- */
+.container {
+    background: var(--container-bg);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* --- Tipografia --- */
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-top: 0;
+    margin-bottom: 30px;
+    line-height: 1.2; /* Melhora a legibilidade em títulos longos */
+}
+
+/* --- Grupo de Formulário (Label + Input) --- */
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--primary-text-color);
+}
+
+/* --- Campos de Input --- */
+#email-input {
+    width: 100%;
+    padding: 14px;
+    background: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    color: var(--primary-text-color);
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+#email-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+#email-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Botão Principal --- */
+#submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 8px;
+    color: var(--title-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#submit-btn:hover:not(:disabled) {
+    background-color: #9a4be4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+}
+
+#submit-btn:disabled {
+    background-color: #4a4a4a;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* --- Loader e Mensagens de Resultado --- */
+.loader {
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top: 5px solid var(--accent-color);
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 30px auto;
+    display: none;
+}
+
+#result {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    word-break: break-word;
+    border: 1px solid transparent;
+}
+
+#result.success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border-color: var(--success-text);
+}
+
+#result.error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border-color: var(--error-text);
+}
+
+
+/* --- Animações --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*
+ * --------------------------------------------------
+ * --- ESTILOS PARA DISPOSITIVOS MÓVEIS (Responsivo) ---
+ * --------------------------------------------------
+ * Aplicado em telas com largura máxima de 768px.
+*/
+@media (max-width: 768px) {
+    body {
+        /* Reduz o espaçamento nas laterais do corpo da página */
+        padding: 15px;
+    }
+
+    .container {
+        /* Reduz o padding interno do container para dar mais espaço ao conteúdo */
+        padding: 25px;
+    }
+
+    h1 {
+        /* Diminui o tamanho da fonte do título principal */
+        font-size: 1.7rem;
+        margin-bottom: 20px;
+    }
+
+    #submit-btn, #email-input {
+        /* Diminui um pouco o padding dos inputs e botões */
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    #result {
+        font-size: 0.95rem;
+    }
+}

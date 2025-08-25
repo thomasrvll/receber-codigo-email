@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Código</title>
+    
+    <!-- Importação da fonte Poppins do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Link para o arquivo de estilo externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Buscador de Código de Verificação</h1>
+        <div class="form-group">
+            <label for="email-input">E-mail Completo:</label>
+            <input type="email" id="email-input" placeholder="ex: seuemail@provedor.com" value="laratavarestwl81@saleis.live">
+        </div>
+        <button id="submit-btn">Buscar Código</button>
+        <div class="loader" id="loader"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // O JavaScript permanece o mesmo, não precisa alterar.
+        const emailInput = document.getElementById('email-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultDiv = document.getElementById('result');
+        const loader = document.getElementById('loader');
+
+        submitBtn.addEventListener('click', async () => {
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                resultDiv.className = 'error';
+                resultDiv.innerHTML = 'Por favor, insira um endereço de e-mail.';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Buscando...';
+            loader.style.display = 'block';
+            resultDiv.innerHTML = '';
+            resultDiv.className = '';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/get-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+
+                if (data.sucesso) {
+                    resultDiv.className = 'success';
+                    resultDiv.innerHTML = `🎉 Código encontrado: <strong>${data.codigo}</strong>`;
+                } else {
+                    resultDiv.className = 'error';
+                    resultDiv.innerHTML = `❌ Erro: ${data.erro}`;
+                }
+
+            } catch (error) {
+                resultDiv.className = 'error';
+                resultDiv.innerHTML = `❌ Erro de conexão. Verifique se o servidor está rodando.`;
+                console.error('Erro na requisição:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Buscar Código';
+                loader.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
